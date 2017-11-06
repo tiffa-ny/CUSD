@@ -5,13 +5,9 @@
   <title> TCAT </title>
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="styles/all.css" media="all"/>
+  <script src="scripts/jquery-3.2.1.min.js" type="text/javascript"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZtZePBTLXPSvNiZL3wPoNmbAugSiJdWc&callback=initMap" type="text/javascript"></script>
 </head>
-
-<script language="javascript">
-    setTimeout(function(){
-        window.location.reload(forceGet = true);
-    }, 5000); 
-</script>
 
 <body>
 
@@ -29,92 +25,16 @@
     </ul>
   </nav>
 
-  <!-- <div id="api_calls">
-    <p>This is an API call.</p>
-    <p>This is another API call.</p>
-  </div> -->
-
   <div id="map_it">
-
-    <ul>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type='text/javascript'>
-
-      $(document).ready(function () {
-        var token = 'Bearer e5159b89-86c1-3cca-8412-59de037c674b';
-        $.ajax({
-          url: 'https://gateway.api.cloud.wso2.com:443/t/mystop/tcat/v1/rest/Vehicles/GetAllVehicles',
-          type: 'GET',
-          dataType: 'json',
-          beforeSend: function(xhr) {
-            xhr.setRequestHeader("Authorization", token);
-          },
-          //data: 'json=' + escape(JSON.stringify(createRequestObject)),
-          success: function(msg) {
-            var data = JSON.stringify(msg);
-            //console.log(msg);
-            MapRoute(msg);
-            //$("#orders").text(data);
-          },
-          error: function(XMLHttpRequest, textStatus, errorThrown) {
-            alert(errorThrown);
-          }
-        });
-      });
-    </script>
-
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZtZePBTLXPSvNiZL3wPoNmbAugSiJdWc&callback=initMap"></script>
-
-    <script language="javascript" type="text/javascript">
-
-      var map;
-
-      function MapRoute(msg) {
-          var latlng = new google.maps.LatLng(42.46, -76.496506);
-          var myOptions =
-          {
-              zoom: 13,
-              center: latlng,
-              mapTypeId: google.maps.MapTypeId.ROADMAP,
-              disableDefaultUI: true
-          };
-          map = new google.maps.Map(document.getElementById("map"), myOptions);
-          var bounds = new google.maps.LatLngBounds();
-          var i;
-          var markers;
-          var image;
-          for (i = 0; i < msg.length; i++) {
-            //if (msg[i].RouteID == )
-            var address = [msg[i].Latitude, msg[i].Longitude];
-            var position = new google.maps.LatLng(address[0], address[1]);
-            if (msg[i].Direction == 'O') {
-              image = './images/bus-icon-outbound.png'
-            } else {
-              image = './images/bus-icon-inbound.png'
-            }
-            marker = new google.maps.Marker({
-              position: position,
-              map: map,
-              icon: image,
-              animation: google.maps.Animation.DROP
-            });
-          }
-      }
-
-
-    //function Button1_onclick() {
-    //    FindLocaton();
-    //}
-    </script>
-  </ul>
+    <script src="scripts/reload.js" type="text/javascript"></script>
+    <script src="scripts/api-call.js" type="text/javascript"></script>
+    <script src="scripts/maps.js" type="text/javascript"></script>
   </div>
-</head>
-<body>
-<div id ="map" style="height: 600px">
-</div>
-      <li>The next Route 30 bus will be arriving in y minutes.</li>
-    </ul>
-</div>
-<div id='orders'></div>
+
+  <div id ="map">
+    
+  </div>
+
 </body>
+
 </html>
